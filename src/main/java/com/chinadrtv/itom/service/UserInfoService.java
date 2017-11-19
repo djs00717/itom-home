@@ -5,5 +5,5 @@ package com.chinadrtv.itom.service;
  */
 
 public interface UserInfoService {
-   public boolean checkUser(String userName,String passWord);
+   public boolean checkUser(String loginName,String passWord);
 }
