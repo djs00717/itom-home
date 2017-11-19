@@ -9,5 +9,5 @@ import java.util.List;
  * Created by djs on 2017/11/14.
  */
 public interface UserInfoDao  {
-    public List<UserInfoDto> list(String loginName);
+     UserInfoDto list(String loginName);
 }

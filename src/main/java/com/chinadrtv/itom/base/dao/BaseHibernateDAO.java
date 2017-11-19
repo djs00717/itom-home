@@ -51,6 +51,21 @@ public abstract class BaseHibernateDAO {
         return obj;
     }
 
+    protected Object list(Class cla, String id) {
+        Object obj = null;
+
+        Session session = HibernateSessionFactory.getSession();
+        try {
+            obj = session.get(cla, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return obj;
+    }
+
     protected void delete(Object object) {
 
         Transaction tx = null;
