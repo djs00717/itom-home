@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ITOM:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="itom.war">
+      <element id="artifact" artifact-name="ITOM:war exploded" />
+    </root>
+  </artifact>
+</component>

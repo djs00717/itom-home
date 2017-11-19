@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+     http://www.springframework.org/schema/jee 
+     http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.1.xsd
+     http://www.springframework.org/schema/lang
+     http://www.springframework.org/schema/lang/spring-lang-3.1.xsd
+     http://www.springframework.org/schema/task
+     http://www.springframework.org/schema/task/spring-task-3.1.xsd
+     http://www.springframework.org/schema/util
+     http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	<!-- 自动发送邮件定时任务 -->
+	<bean id="sendEmailJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean" lazy-init="true">
+		<property name="jobClass" value="com.chinadrtv.scm.email.quartz.SendEmailJob"/>
+		<property name="durability" value="true" />
+		<property name="description" value="发送邮件 "/>	
+	</bean>
+	<bean id="sendEmailBean" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="sendEmailJob" />
+		<property name="cronExpression" value="${cronExpression}" />
+	</bean>
+	<!-- 任务调度管理器 -->
+	<bean id="clusterQuartzScheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- 是否覆盖已有的任务 -->
+		<property name="overwriteExistingJobs" value="true" />
+		<property name="triggers">
+			<list>
+				<ref bean="sendEmailBean" />
+			</list>
+		</property>
+		<property name="quartzProperties" ref="quartzProperties" />
+	</bean>
+	<util:properties id="quartzProperties">
+		<prop key="org.quartz.scheduler.instanceName">DefaultQuartzScheduler</prop>
+		<prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+		<prop key="org.quartz.scheduler.skipUpdateCheck">true</prop>
+		<prop key="org.quartz.jobStore.class">org.quartz.impl.jdbcjobstore.JobStoreTX</prop>
+		<prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.oracle.OracleDelegate</prop>
+		<prop key="org.quartz.jobStore.dataSource">myDS</prop>
+		<prop key="org.quartz.jobStore.tablePrefix">QRTZ_</prop>
+		<prop key="org.quartz.jobStore.isClustered">true</prop>
+		<prop key="org.quartz.dataSource.myDS.jndiURL">${jndiURL}</prop>
+	</util:properties>
+</beans>

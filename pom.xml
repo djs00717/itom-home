@@ -1,0 +1,188 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>acorn.djs</groupId>
+  <artifactId>com.chinadrtv.djs</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>com.chinadrtv.djs Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
+  <!--设置通用参数版本信息-->
+  <properties>
+    <spring.security.version>3.2.5.RELEASE</spring.security.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+
+<!--橡果自定义jar-->
+    <dependency>
+      <groupId>acorn.erp</groupId>
+      <artifactId>com.chinadrtv.erp.oms.security</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+
+   <!-- 导入 servlet-->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- 添加hibernate依赖包 -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.1.10.Final</version>
+    </dependency>
+
+    <!--spring-->
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>4.3.8.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>4.3.8.RELEASE</version>
+    </dependency>
+
+
+    <!--使用 Spring Security 保护 Web 应用的安全, 以后研究，暂时不学习
+    com.chinadrtv.erp.user.util.SecurityHelper
+    https://www.ibm.com/developerworks/cn/java/j-lo-springsecurity/
+    -->
+       <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-web</artifactId>
+         <version>${spring.security.version}</version>
+       </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>${spring.security.version}</version>
+    </dependency>
+
+
+    <!--jstl注入-->
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+
+    <!--oracle数据库导入-->
+    <dependency>
+      <groupId>acorn.erp</groupId>
+      <artifactId>hibernate-deps</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <type>pom</type>
+      <scope>compile</scope>
+      <optional>false</optional>
+      <exclusions>
+        <exclusion>
+          <groupId>com.oracle</groupId>
+          <artifactId>ojdbc16</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc16</artifactId>
+      <version>11.2.0.1.0</version>
+      <type>jar</type>
+      <scope>provided</scope>
+      <optional>false</optional>
+    </dependency>
+
+<!--  导入 log 日志功能-->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.9.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.9.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-web</artifactId>
+      <version>2.1</version>
+    </dependency>
+
+
+    <!--使用Validator做SpringMVC的验证框架-->
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+
+    <!--http://www.blogjava.net/bolo/archive/2014/04/16/412533.html
+     总结一下自己使用jackson处理对象与JSON之间相互转换的心得。
+     jackson是一个用Java编写的，用来处理JSON格式数据的类库，它速度非常快，目前来看使用很广泛，逐渐替代了Gson和json-lib。
+    -->
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-core-asl</artifactId>
+      <version>1.9.9</version>
+      <type>jar</type>
+      <!--<scope>provided</scope> -->
+    </dependency>
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.1</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+    <dependency>
+      <groupId>commons-lang</groupId>
+      <artifactId>commons-lang</artifactId>
+      <version>2.6</version>
+    </dependency>
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <version>RELEASE</version>
+      </dependency>
+
+   <!-- dao .xmlxuyao -->
+    <dependency>
+      <groupId>org.compass-project</groupId>
+      <artifactId>compass</artifactId>
+      <version>2.2.0</version>
+    </dependency>
+
+
+  </dependencies>
+
+
+  <build>
+    <finalName>itom</finalName>
+  </build>
+
+
+</project>
